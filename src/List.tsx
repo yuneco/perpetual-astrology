@@ -5,6 +5,7 @@ import { ROW_HEIGHT } from "./appConfig";
 
 type Props = {
   offsetPx: number;
+  seedNumber: number;
 };
 
 const watchSize = (
@@ -23,8 +24,9 @@ const watchSize = (
 type ContentProps = {
   start: number;
   count: number;
+  seedNumber: number;
 };
-const ListContent: FC<ContentProps> = ({ start, count }) => {
+const ListContent: FC<ContentProps> = ({ start, count, seedNumber }) => {
   const row = (rowNo: number) => (
     <Flex
       key={`row-${rowNo}`}
@@ -39,7 +41,7 @@ const ListContent: FC<ContentProps> = ({ start, count }) => {
         pointerEvents: "auto",
       }}
     >
-      <ListRow rowNo={rowNo} />
+      <ListRow rowNo={rowNo} seedNumber={seedNumber} />
     </Flex>
   );
 
@@ -47,7 +49,7 @@ const ListContent: FC<ContentProps> = ({ start, count }) => {
 };
 const ListContentMemo = memo(ListContent);
 
-export const List: FC<Props> = ({ offsetPx }) => {
+export const List: FC<Props> = ({ offsetPx, seedNumber }) => {
   const [count, setCount] = useState(0);
   const start = Math.floor(offsetPx / ROW_HEIGHT);
 
@@ -69,7 +71,7 @@ export const List: FC<Props> = ({ offsetPx }) => {
       ref={outer}
       style={{ transform: `translateY(${translateY}px)` }}
     >
-      <ListContentMemo start={start} count={count} />
+      <ListContentMemo start={start} count={count} seedNumber={seedNumber} />
     </Box>
   );
 };

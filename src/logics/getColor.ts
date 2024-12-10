@@ -1,8 +1,20 @@
 import { getHashIn } from "./getHash";
 
-export const getColorForDate = (date: Date): [string, string] => {
+export const getColorForDate = (
+  date: Date,
+  seedNumber: number,
+): [string, string] => {
   const d = Math.floor(date.getTime() / 86400000);
-  const [r, g, b] = getHashIn("color", 3, d, 256); // rgb
+
+  const [r, g, b] = getHashIn(
+    {
+      name: "color",
+      setLength: 3,
+      seedNumber,
+    },
+    d,
+    256,
+  ); // rgb
   // bg color luminance
   const l = 0.299 * r + 0.587 * g + 0.114 * b;
   // fore color: black or white

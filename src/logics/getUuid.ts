@@ -1,4 +1,4 @@
-import { MersenneTwister } from "./getHash";
+import { MersenneTwister } from "./MersenneTwister";
 
 export const generateUUIDv4 = (n: number): string => {
   const generator = new MersenneTwister(n);

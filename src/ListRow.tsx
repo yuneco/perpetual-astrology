@@ -10,6 +10,7 @@ import { getMenuForDate } from "./logics/getMenu";
 
 type Props = {
   rowNo: number;
+  seedNumber: number;
 };
 
 const DayOfWeek = ({ day }: { day: number }) => {
@@ -25,22 +26,21 @@ const DayOfWeek = ({ day }: { day: number }) => {
   );
 };
 
-const ListRowComp: FC<Props> = ({ rowNo }) => {
+const ListRowComp: FC<Props> = ({ rowNo, seedNumber }) => {
   const date = dateForNo(rowNo);
-  const [bg, fg] = getColorForDate(date);
+  const [bg, fg] = getColorForDate(date, seedNumber);
   return (
     <Flex gap={4} fontFamily="fonts.mono" alignItems="center">
       <span>{toYMD(date)}</span>
       <DayOfWeek day={date.getDay()} />
       <span>{getMoon(date)}</span>
       <span>
-        <StarRating rating={getStarForDate(date)} />
+        <StarRating rating={getStarForDate(date, seedNumber)} />
       </span>
       <ColorBar color={bg} textColor={fg} />
       <k.span className="line3" paddingLeft={2}>
-        {getMenuForDate(date)}
+        {getMenuForDate(date, seedNumber)}
       </k.span>
-      {/* <span>{uuidForDate(date)}</span> */}
     </Flex>
   );
 };

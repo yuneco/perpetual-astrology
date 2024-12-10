@@ -110,11 +110,17 @@ const db = [
 
 const RETURN_COUNT = 3;
 
-export const getMenuForDate = (date: Date): string => {
+export const getMenuForDate = (date: Date, seedNumber: number): string => {
   const d = Math.floor(date.getTime() / 86400000);
-  const menus = getHashIn("menu", RETURN_COUNT, d, db.length - 1).map(
-    (i) => db[i],
-  );
+  const menus = getHashIn(
+    {
+      name: "menu",
+      setLength: RETURN_COUNT,
+      seedNumber,
+    },
+    d,
+    db.length - 1,
+  ).map((i) => db[i]);
   const totalPrices = menus.map((m) => m[1]).reduce((a, b) => a + b, 0);
   const menuStr = menus
     .sort((m1, m2) => m2[1] - m1[1])
