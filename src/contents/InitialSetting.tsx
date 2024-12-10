@@ -1,6 +1,6 @@
 import { type FC, useState } from "react";
-import type { Seed } from "./defs/Seed";
-import { zodiacSigns } from "./defs/zodiacSign";
+import type { Seed } from "../defs/Seed";
+import { zodiacSigns } from "../defs/zodiacSign";
 import { Box } from "@kuma-ui/core";
 
 type Props = {

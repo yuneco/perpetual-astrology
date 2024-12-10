@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
-import type { Seed } from "./defs/Seed";
-import { isZodiacSignId } from "./defs/zodiacSign";
+import type { Seed } from "../../defs/Seed";
+import { isZodiacSignId } from "../../defs/zodiacSign";
 
 type LocProps = {
   seed?: Seed;

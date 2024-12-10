@@ -1,7 +1,7 @@
-import { Box, css, Flex } from "@kuma-ui/core";
+import { Box } from "@kuma-ui/core";
 import { type FC, memo, useCallback, useState } from "react";
 import { ListRow } from "./ListRow";
-import { ROW_HEIGHT } from "./defs/appConfig";
+import { ROW_HEIGHT } from "../defs/appConfig";
 
 type Props = {
   offsetPx: number;

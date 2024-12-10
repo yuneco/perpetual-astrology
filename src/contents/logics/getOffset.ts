@@ -1,4 +1,4 @@
-import { EPOC, MAX_DAY, ROW_HEIGHT } from "../defs/appConfig";
+import { EPOC, MAX_DAY, ROW_HEIGHT } from "../../defs/appConfig";
 
 const getOffsetPxForDay = (date: Date): number => {
   const d = new Date(date);

@@ -1,5 +1,5 @@
-import type { Seed } from "../defs/Seed";
-import { getZodiacSign } from "../defs/zodiacSign";
+import type { Seed } from "../../defs/Seed";
+import { getZodiacSign } from "../../defs/zodiacSign";
 import { toYMDJa } from "./dateForNo";
 import type { DayContents } from "./getDayContents";
 

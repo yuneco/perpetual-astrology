@@ -1,4 +1,4 @@
-import { MersenneTwister } from "../logics/MersenneTwister";
+import { MersenneTwister } from "../contents/logics/MersenneTwister";
 import { zodiacSigns, type ZodiacSignId } from "./zodiacSign";
 
 export type Seed = Readonly<{

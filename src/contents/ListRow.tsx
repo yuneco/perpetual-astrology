@@ -1,8 +1,8 @@
 import { memo, type FC } from "react";
-import { Flex, k } from "@kuma-ui/core";
+import { css, Flex, k } from "@kuma-ui/core";
 import { StarRating } from "./StarRating";
 import { ColorBar } from "./ColorBar";
-import { ROW_HEIGHT } from "./defs/appConfig";
+import { ROW_HEIGHT } from "../defs/appConfig";
 import { getDayContents } from "./logics/getDayContents";
 import { toYMD } from "./logics/dateForNo";
 
@@ -42,7 +42,17 @@ const ListRowComp: FC<Props> = ({ dayNo, seedNumber, onClick }) => {
           color={contents.luckyColor}
           textColor={contents.luckyTextColor}
         />
-        <k.span className="line3" paddingLeft={2}>
+        <k.span
+          paddingLeft={2}
+          className={css`
+            line-height: 1.2;
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        `}
+        >
           {contents.luckyMenu}
         </k.span>
       </Flex>

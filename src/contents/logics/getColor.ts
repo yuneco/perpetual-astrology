@@ -13,7 +13,7 @@ export const getColorForDate = (
       seedNumber,
     },
     d,
-    256,
+    255,
   ); // rgb
   // bg color luminance
   const l = 0.299 * r + 0.587 * g + 0.114 * b;

@@ -1,11 +1,11 @@
 import { useMemo, useRef, type FC } from "react";
 import { getDayContents } from "./logics/getDayContents";
 import { Box, css, Grid, Text } from "@kuma-ui/core";
-import { type Seed, seedToNumber } from "./defs/Seed";
+import { type Seed, seedToNumber } from "../defs/Seed";
 import { ColorBar } from "./ColorBar";
 import { StarRating } from "./StarRating";
 import { copyToClipboard, tweet } from "./logics/exportContents";
-import { getZodiacSign } from "./defs/zodiacSign";
+import { getZodiacSign } from "../defs/zodiacSign";
 import { toYMDJa } from "./logics/dateForNo";
 
 type Props = {
@@ -61,9 +61,9 @@ export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
       width={"100vw"}
       height={"100vh"}
       bg={"#fff8"}
-      backdropFilter={"blur(8px)"}
       onClick={handleClose}
       animation="fade 0.3s 1"
+      className="bgBlur8"
     >
       <Box
         ref={innerRef}
@@ -76,7 +76,6 @@ export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
         padding={16}
         borderRadius={8}
         boxShadow={"0 0 16px #0004"}
-        backdropFilter={"blur(4px)"}
         className={css`
           translate: -50% -50%
         `}

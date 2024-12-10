@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import type { Seed } from "./defs/Seed";
+import type { Seed } from "../defs/Seed";
 import { Flex, Text } from "@kuma-ui/core";
-import { getZodiacSign } from "./defs/zodiacSign";
+import { getZodiacSign } from "../defs/zodiacSign";
 
 type Props = {
   seed: Seed;
@@ -16,7 +16,7 @@ export const ListHeader: FC<Props> = ({ seed, onRequestReset }) => {
       left={0}
       w="100%"
       bg="#fff8"
-      backdropFilter="blur(4px)"
+      className="bgBlur4"
     >
       <Text>
         {seed.userName}さん{getZodiacSign(seed.sign).name}の運勢

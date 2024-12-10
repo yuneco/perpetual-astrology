@@ -1,15 +1,21 @@
 import { useState } from "react";
 import "./App.css";
-import { InfScroller } from "./InfScroller";
+import { InfScroller } from "./infScroll/InfScroller";
 import { Box } from "@kuma-ui/core";
-import { List } from "./List";
+import { List } from "./contents/List";
 import { MAX_LIST_Y_PX } from "./defs/appConfig";
-import { InitialSetting } from "./InitialSetting";
+import { InitialSetting } from "./contents/InitialSetting";
 import { DEFAULT_SEED, seedToNumber, type Seed } from "./defs/Seed";
-import { ListHeader } from "./ListHeader";
-import { DayDetail } from "./DayDetail";
-import { getOffsetPxForDayNo, getOffsetPxForToday } from "./logics/getOffset";
-import { initialLoc, useAutoSetLocation } from "./useAutoSetLocation";
+import { ListHeader } from "./contents/ListHeader";
+import { DayDetail } from "./contents/DayDetail";
+import {
+  getOffsetPxForDayNo,
+  getOffsetPxForToday,
+} from "./contents/logics/getOffset";
+import {
+  initialLoc,
+  useAutoSetLocation,
+} from "./contents/logics/useAutoSetLocation";
 
 export const App = () => {
   const [y, setY] = useState(0);

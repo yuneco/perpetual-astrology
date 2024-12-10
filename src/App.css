@@ -31,14 +31,13 @@ body {
   display:none;  
 }
 
-.line3 {
-  line-height: 1.2;
-  overflow: hidden;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-
+.bgBlur4 {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.bgBlur8 {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 @keyframes fade {
