@@ -1,0 +1,42 @@
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  scrollbar-color: #0004 transparent;
+  font-size: 0.8em;
+}
+
+/* < 480px */
+@media (max-width: 480px) {
+  body {
+    font-size: 0.6em;
+  }
+}
+
+* {
+  box-sizing: border-box;  
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display:none;  
+}
+
+.line3 {
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+
+}
