@@ -23,3 +23,12 @@ export const dateForNo = (day: number): Date => {
 export const toYMD = (date: Date): string => {
   return `${date.getFullYear()}/${pad2(date.getMonth() + 1)}/${pad2(date.getDate())}`;
 };
+
+/**
+ * format date to YYYY年M月D日
+ * @param date
+ * @returns date string. YYYY年M月D日
+ */
+export const toYMDJa = (date: Date): string => {
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+};

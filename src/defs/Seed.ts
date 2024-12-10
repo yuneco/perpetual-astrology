@@ -1,13 +1,14 @@
 import { MersenneTwister } from "../logics/MersenneTwister";
+import { zodiacSigns, type ZodiacSignId } from "./zodiacSign";
 
-export type Seed = {
+export type Seed = Readonly<{
   userName: string;
-  sign: string;
-};
+  sign: ZodiacSignId;
+}>;
 
 export const DEFAULT_SEED: Seed = {
   userName: "名無し",
-  sign: "aries",
+  sign: zodiacSigns[0].id,
 };
 
 export const seedToNumber = (seed: Seed): number => {

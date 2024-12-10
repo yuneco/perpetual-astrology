@@ -3,33 +3,65 @@ import "./App.css";
 import { InfScroller } from "./InfScroller";
 import { Box } from "@kuma-ui/core";
 import { List } from "./List";
-import { MAX_LIST_Y_PX, TODAY_LIST_OFFSET_PX } from "./appConfig";
+import { MAX_LIST_Y_PX } from "./defs/appConfig";
 import { InitialSetting } from "./InitialSetting";
 import { DEFAULT_SEED, seedToNumber, type Seed } from "./defs/Seed";
 import { ListHeader } from "./ListHeader";
+import { DayDetail } from "./DayDetail";
+import { getOffsetPxForDayNo, getOffsetPxForToday } from "./logics/getOffset";
+import { initialLoc, useAutoSetLocation } from "./useAutoSetLocation";
 
 export const App = () => {
   const [y, setY] = useState(0);
-  const [initialSeed, setInitialSeed] = useState<Seed>(DEFAULT_SEED);
-  const [seed, setSeed] = useState<Seed>();
+  const [initialSeed, setInitialSeed] = useState<Seed>(
+    initialLoc.seed ?? DEFAULT_SEED,
+  );
+  const [seed, setSeed] = useState<Seed | undefined>(
+    initialLoc.seed ?? undefined,
+  );
+  const [selectedDayNo, setSelectedDayNo] = useState<number | undefined>(
+    initialLoc.dayNo ?? undefined,
+  );
+
+  useAutoSetLocation({ seed, dayNo: selectedDayNo });
 
   const reset = () => {
     setInitialSeed(seed ?? DEFAULT_SEED);
     setSeed(undefined);
   };
 
+  const selectDay = (dayNo: number) => {
+    if (!seed) return;
+    setSelectedDayNo(dayNo);
+  };
+
   return (
     <Box w="100%" h="100svh" position="relative">
       {seed ? (
         <>
-          <ListHeader seed={seed} onRequestReset={reset} />
           <InfScroller
             onChange={setY}
             max={MAX_LIST_Y_PX}
-            initial={TODAY_LIST_OFFSET_PX}
+            initial={
+              initialLoc.dayNo
+                ? getOffsetPxForDayNo(initialLoc.dayNo)
+                : getOffsetPxForToday()
+            }
           >
-            <List seedNumber={seedToNumber(seed)} offsetPx={y} />
+            <List
+              seedNumber={seedToNumber(seed)}
+              offsetPx={y}
+              onClick={selectDay}
+            />
           </InfScroller>
+          <ListHeader seed={seed} onRequestReset={reset} />
+          {selectedDayNo !== undefined && (
+            <DayDetail
+              dayNo={selectedDayNo}
+              seed={seed}
+              onClose={() => setSelectedDayNo(undefined)}
+            />
+          )}
         </>
       ) : (
         <InitialSetting onOk={setSeed} initialSeed={initialSeed} />

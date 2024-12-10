@@ -1,46 +1,51 @@
 import { memo, type FC } from "react";
-import { dateForNo, toYMD } from "./logics/dateForNo";
 import { Flex, k } from "@kuma-ui/core";
-import { getMoon } from "./logics/getMoon";
 import { StarRating } from "./StarRating";
-import { getStarForDate } from "./logics/getStar";
 import { ColorBar } from "./ColorBar";
-import { getColorForDate } from "./logics/getColor";
-import { getMenuForDate } from "./logics/getMenu";
+import { ROW_HEIGHT } from "./defs/appConfig";
+import { getDayContents } from "./logics/getDayContents";
+import { toYMD } from "./logics/dateForNo";
 
 type Props = {
-  rowNo: number;
+  dayNo: number;
   seedNumber: number;
+  onClick: (rowNo: number) => void;
 };
 
-const DayOfWeek = ({ day }: { day: number }) => {
-  const days = ["日", "月", "火", "水", "木", "金", "土"];
+const ListRowComp: FC<Props> = ({ dayNo, seedNumber, onClick }) => {
+  const contents = getDayContents(dayNo, seedNumber);
   return (
-    <k.span
-      color={
-        day === 0 ? "colors.sun" : day === 6 ? "colors.sat" : "colors.body"
-      }
+    <Flex
+      key={`row-${dayNo}`}
+      h={ROW_HEIGHT}
+      w="100%"
+      overflowY={"hidden"}
+      bg={dayNo % 2 === 0 ? "#fff" : "#f9f9f9"}
+      borderRadius={4}
+      alignItems={"center"}
+      padding="0 8px"
+      style={{
+        pointerEvents: "auto",
+      }}
+      _hover={{
+        bg: "colors.focus.bg",
+        cursor: "pointer",
+      }}
+      onClick={() => onClick(dayNo)}
     >
-      {days[day]}
-    </k.span>
-  );
-};
-
-const ListRowComp: FC<Props> = ({ rowNo, seedNumber }) => {
-  const date = dateForNo(rowNo);
-  const [bg, fg] = getColorForDate(date, seedNumber);
-  return (
-    <Flex gap={4} fontFamily="fonts.mono" alignItems="center">
-      <span>{toYMD(date)}</span>
-      <DayOfWeek day={date.getDay()} />
-      <span>{getMoon(date)}</span>
-      <span>
-        <StarRating rating={getStarForDate(date, seedNumber)} />
-      </span>
-      <ColorBar color={bg} textColor={fg} />
-      <k.span className="line3" paddingLeft={2}>
-        {getMenuForDate(date, seedNumber)}
-      </k.span>
+      <Flex gap={4} fontFamily="fonts.mono" alignItems="center">
+        <span>{toYMD(contents.date)}</span>
+        <k.span color={contents.dayColor}>{contents.dayOfWeekStr}</k.span>
+        <span>{contents.moon}</span>
+        <StarRating rating={contents.rating} />
+        <ColorBar
+          color={contents.luckyColor}
+          textColor={contents.luckyTextColor}
+        />
+        <k.span className="line3" paddingLeft={2}>
+          {contents.luckyMenu}
+        </k.span>
+      </Flex>
     </Flex>
   );
 };

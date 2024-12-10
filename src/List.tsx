@@ -1,11 +1,12 @@
 import { Box, css, Flex } from "@kuma-ui/core";
 import { type FC, memo, useCallback, useState } from "react";
 import { ListRow } from "./ListRow";
-import { ROW_HEIGHT } from "./appConfig";
+import { ROW_HEIGHT } from "./defs/appConfig";
 
 type Props = {
   offsetPx: number;
   seedNumber: number;
+  onClick: (dayNo: number) => void;
 };
 
 const watchSize = (
@@ -25,31 +26,28 @@ type ContentProps = {
   start: number;
   count: number;
   seedNumber: number;
+  onClick: (dayNo: number) => void;
 };
-const ListContent: FC<ContentProps> = ({ start, count, seedNumber }) => {
-  const row = (rowNo: number) => (
-    <Flex
-      key={`row-${rowNo}`}
-      h={ROW_HEIGHT}
-      w="100%"
-      overflowY={"hidden"}
-      bg={rowNo % 2 === 0 ? "#fff" : "#f9f9f9"}
-      borderRadius={4}
-      alignItems={"center"}
-      padding="0 8px"
-      style={{
-        pointerEvents: "auto",
-      }}
-    >
-      <ListRow rowNo={rowNo} seedNumber={seedNumber} />
-    </Flex>
+const ListContent: FC<ContentProps> = ({
+  start,
+  count,
+  seedNumber,
+  onClick,
+}) => {
+  const row = (dayNo: number) => (
+    <ListRow
+      key={dayNo}
+      dayNo={dayNo}
+      seedNumber={seedNumber}
+      onClick={onClick}
+    />
   );
 
   return <>{Array.from({ length: count }).map((_, i) => row(start + i))}</>;
 };
 const ListContentMemo = memo(ListContent);
 
-export const List: FC<Props> = ({ offsetPx, seedNumber }) => {
+export const List: FC<Props> = ({ offsetPx, seedNumber, onClick }) => {
   const [count, setCount] = useState(0);
   const start = Math.floor(offsetPx / ROW_HEIGHT);
 
@@ -71,7 +69,12 @@ export const List: FC<Props> = ({ offsetPx, seedNumber }) => {
       ref={outer}
       style={{ transform: `translateY(${translateY}px)` }}
     >
-      <ListContentMemo start={start} count={count} seedNumber={seedNumber} />
+      <ListContentMemo
+        start={start}
+        count={count}
+        seedNumber={seedNumber}
+        onClick={onClick}
+      />
     </Box>
   );
 };

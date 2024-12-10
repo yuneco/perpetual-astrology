@@ -14,7 +14,7 @@ export const InitialSetting: FC<Props> = ({ initialSeed, onOk }) => {
   const handleChangeSign = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSeed({
       ...seed,
-      sign: e.target.value,
+      sign: e.target.value as Seed["sign"],
     });
   };
 
@@ -37,6 +37,7 @@ export const InitialSetting: FC<Props> = ({ initialSeed, onOk }) => {
         {zodiacSigns.map((sign) => (
           <option key={sign.id} value={sign.id}>
             {sign.name}
+            {sign.range}
           </option>
         ))}
       </select>

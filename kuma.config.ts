@@ -5,6 +5,14 @@ const theme = createTheme({
     body: "#333",
     sun: "#FF6699",
     sat: "#6699FF",
+    focus: {
+      bg: "#FFCC0044",
+      fg: "#333",
+    },
+    active: {
+      bg: "#FF9900",
+      fg: "#333",
+    },
   },
   spacings: {
     sm: "0.5rem",
