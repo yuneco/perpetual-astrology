@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, type FC } from "react";
 import { getDayContents } from "./logics/getDayContents";
-import { Box, Button, css, Grid, HStack, k, Text, VStack } from "@kuma-ui/core";
+import { Box, Button, Grid, HStack, k, Text, VStack } from "@kuma-ui/core";
 import { type Seed, seedToNumber } from "../defs/Seed";
 import { ColorBar } from "./ColorBar";
 import { StarRating } from "./StarRating";

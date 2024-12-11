@@ -1,4 +1,4 @@
-import { dateForNo, toYMD } from "./dateForNo";
+import { dateForNo } from "./dateForNo";
 import { getColorForDate } from "./getColor";
 import { getMenuForDate } from "./getMenu";
 import { getMoon } from "./getMoon";

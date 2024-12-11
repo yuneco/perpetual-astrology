@@ -1,5 +1,5 @@
 import { memo, type FC } from "react";
-import { css, Flex, k, Text } from "@kuma-ui/core";
+import { css, Flex, Text } from "@kuma-ui/core";
 import { StarRating } from "./StarRating";
 import { ColorBar } from "./ColorBar";
 import { ROW_HEIGHT } from "../defs/appConfig";
