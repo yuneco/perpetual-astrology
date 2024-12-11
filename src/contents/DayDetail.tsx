@@ -77,7 +77,7 @@ export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
         ref={innerRef}
         variant="modal"
         width="max(400px, 50%)"
-        maxW="800px"
+        maxW="calc(min(800px, 100% - 32px))"
         animation="pop 0.2s 1"
         onClick={(ev: React.MouseEvent) => ev.stopPropagation()}
       >
@@ -93,7 +93,7 @@ export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
           </Box>
 
           <Grid
-            gridTemplateColumns="140px 1fr"
+            gridTemplateColumns="100px 1fr"
             gridTemplateRows="repeat(auto, min-content)"
             gap="4px 12px"
             alignItems="center"

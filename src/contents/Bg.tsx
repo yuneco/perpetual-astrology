@@ -1,4 +1,4 @@
-import { Flex } from "@kuma-ui/core";
+import { Box, Flex } from "@kuma-ui/core";
 import type { FC, PropsWithChildren } from "react";
 
 export const Bg: FC<PropsWithChildren> = ({ children }) => {
@@ -75,7 +75,9 @@ export const Bg: FC<PropsWithChildren> = ({ children }) => {
           />
         </g>
       </svg>
-      {children}
+      <Box position="absolute" top={0} left={0} w="100%" h="100%" p={32}>
+        {children}
+      </Box>
     </Flex>
   );
 };

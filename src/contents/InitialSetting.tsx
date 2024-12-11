@@ -28,7 +28,7 @@ export const InitialSetting: FC<Props> = ({ initialSeed, onOk }) => {
 
   return (
     <Bg>
-      <Box variant="modal">
+      <Box variant="modal" maxW="calc(100% - 32px)">
         <VStack gap={24}>
           <k.h2 textAlign="center">はじめになまえと星座をおしえてね</k.h2>
           <VStack gap={12}>

@@ -21,7 +21,7 @@ type Props = {
 
 export const StarRating: FC<Props> = ({ rating, maxRating = 5 }) => {
   return (
-    <k.span aria-label={`${rating}/${maxRating}`} w={`${maxRating}em`}>
+    <k.span aria-label={`${rating}/${maxRating}`}>
       {Array.from({ length: maxRating }).map((_, i) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
         <span key={i}>{i < rating ? "⭐️" : <EmptyStar />}</span>
