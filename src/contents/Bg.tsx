@@ -17,6 +17,9 @@ export const Bg: FC<PropsWithChildren> = ({ children }) => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 640 800"
         opacity="0.4"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="none"
       >
         <defs>
           <filter
