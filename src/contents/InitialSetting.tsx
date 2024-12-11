@@ -1,7 +1,8 @@
 import { type FC, useState } from "react";
 import type { Seed } from "../defs/Seed";
 import { zodiacSigns } from "../defs/zodiacSign";
-import { Box } from "@kuma-ui/core";
+import { Box, Button, HStack, Input, k, Select, VStack } from "@kuma-ui/core";
+import { Bg } from "./Bg";
 
 type Props = {
   initialSeed: Seed;
@@ -26,24 +27,37 @@ export const InitialSetting: FC<Props> = ({ initialSeed, onOk }) => {
   };
 
   return (
-    <Box
-      position="fixed"
-      top="50%"
-      left="50%"
-      transform="translate(-50%, -50%)"
-    >
-      <input value={seed.userName} onChange={handleChangeName} />
-      <select value={seed.sign} onChange={handleChangeSign}>
-        {zodiacSigns.map((sign) => (
-          <option key={sign.id} value={sign.id}>
-            {sign.name}
-            {sign.range}
-          </option>
-        ))}
-      </select>
-      <button type="button" onClick={() => onOk(seed)}>
-        OK
-      </button>
-    </Box>
+    <Bg>
+      <Box variant="modal">
+        <VStack gap={24}>
+          <k.h2 textAlign="center">はじめになまえと星座をおしえてね</k.h2>
+          <VStack gap={12}>
+            <HStack alignItems="center" gap={4}>
+              <Input
+                variant="large"
+                value={seed.userName}
+                onChange={handleChangeName}
+              />
+              さん
+            </HStack>
+            <Select
+              variant="large"
+              value={seed.sign}
+              onChange={handleChangeSign}
+            >
+              {zodiacSigns.map((sign) => (
+                <option key={sign.id} value={sign.id}>
+                  {sign.name}
+                  {sign.range}
+                </option>
+              ))}
+            </Select>
+          </VStack>
+          <Button variant="large" type="button" onClick={() => onOk(seed)}>
+            10万年の運勢をみる
+          </Button>
+        </VStack>
+      </Box>
+    </Bg>
   );
 };

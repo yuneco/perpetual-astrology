@@ -1,12 +1,13 @@
-import { useMemo, useRef, type FC } from "react";
+import { useMemo, useRef, useState, type FC } from "react";
 import { getDayContents } from "./logics/getDayContents";
-import { Box, css, Grid, Text } from "@kuma-ui/core";
+import { Box, Button, css, Grid, HStack, k, Text, VStack } from "@kuma-ui/core";
 import { type Seed, seedToNumber } from "../defs/Seed";
 import { ColorBar } from "./ColorBar";
 import { StarRating } from "./StarRating";
 import { copyToClipboard, tweet } from "./logics/exportContents";
 import { getZodiacSign } from "../defs/zodiacSign";
 import { toYMDJa } from "./logics/dateForNo";
+import { ColoseButton } from "./CloseButton";
 
 type Props = {
   dayNo: number;
@@ -17,12 +18,19 @@ type Props = {
 export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
   const outerRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
+  const [isCopied, setIsCopied] = useState(false);
 
   const seedNumber = useMemo(() => seedToNumber(seed), [seed]);
   const contents = useMemo(
     () => getDayContents(dayNo, seedNumber),
     [seedNumber, dayNo],
   );
+
+  const handleCopy = () => {
+    copyToClipboard(seed, contents);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
 
   const handleClose = async () => {
     const outer = outerRef.current;
@@ -67,54 +75,50 @@ export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
     >
       <Box
         ref={innerRef}
-        position={"fixed"}
-        margin={"auto"}
-        bg={"#fffc"}
-        top={"50%"}
-        left={"50%"}
+        variant="modal"
         width="max(400px, 50%)"
-        padding={16}
-        borderRadius={8}
-        boxShadow={"0 0 16px #0004"}
-        className={css`
-          translate: -50% -50%
-        `}
         animation="pop 0.2s 1"
         onClick={(ev: React.MouseEvent) => ev.stopPropagation()}
       >
-        <h2>
-          {seed.userName}さん{getZodiacSign(seed.sign).name}
-        </h2>
-        <h3>
-          {toYMDJa(contents.date)}（{contents.dayOfWeekStr}曜日）の運勢
-        </h3>
+        <ColoseButton onClick={handleClose} />
+        <VStack gap={16}>
+          <Box>
+            <k.h2 textAlign="center">
+              {seed.userName}さん{getZodiacSign(seed.sign).name}
+            </k.h2>
+            <k.h3 textAlign="center">
+              {toYMDJa(contents.date)}（{contents.dayOfWeekStr}曜日）の運勢
+            </k.h3>
+          </Box>
 
-        <Grid
-          gridTemplateColumns="140px 1fr"
-          gridTemplateRows="repeat(auto, min-content)"
-          gap={4}
-        >
-          <Text>運勢</Text>
-          <StarRating rating={contents.rating} />
-          <Text>ラッキーカラー</Text>
-          <ColorBar
-            color={contents.luckyColor}
-            textColor={contents.luckyTextColor}
-          />
-          <Text>ラッキーサイゼ</Text>
-          <p>{contents.luckyMenu}</p>
-          <Text>ラッキーUUID</Text>
-          <p>{contents.luckyUuid}</p>
-        </Grid>
-        <button type="button" onClick={handleClose}>
-          Close
-        </button>
-        <button type="button" onClick={() => copyToClipboard(seed, contents)}>
-          Copy
-        </button>
-        <button type="button" onClick={() => tweet(seed, contents)}>
-          Tweet
-        </button>
+          <Grid
+            gridTemplateColumns="140px 1fr"
+            gridTemplateRows="repeat(auto, min-content)"
+            gap="4px 12px"
+            alignItems="center"
+          >
+            <Text variant="label">運勢</Text>
+            <StarRating rating={contents.rating} />
+            <Text variant="label">ラッキーカラー</Text>
+            <ColorBar
+              color={contents.luckyColor}
+              textColor={contents.luckyTextColor}
+            />
+            <Text variant="label">ラッキーサイゼ</Text>
+            <p>{contents.luckyMenu}</p>
+            <Text variant="label">ラッキーUUID</Text>
+            <p>{contents.luckyUuid}</p>
+          </Grid>
+
+          <HStack alignItems="center" justifyContent="center" gap={8}>
+            <Button type="button" onClick={handleCopy}>
+              {isCopied ? "✔️ Copied!" : "Copy"}
+            </Button>
+            <Button type="button" onClick={() => tweet(seed, contents)}>
+              Tweet
+            </Button>
+          </HStack>
+        </VStack>
       </Box>
     </Box>
   );

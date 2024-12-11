@@ -1,9 +1,17 @@
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 300;
+  font-style: normal;
   margin: 0;
   padding: 0;
   scrollbar-color: #0004 transparent;
   font-size: 0.8em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 300;
+  margin: 0;
 }
 
 /* < 480px */
@@ -63,5 +71,13 @@ body {
   100% {
     scale: 1;
   }
-  
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

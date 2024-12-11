@@ -7,7 +7,7 @@ export type Seed = Readonly<{
 }>;
 
 export const DEFAULT_SEED: Seed = {
-  userName: "名無し",
+  userName: "ねこかわいい",
   sign: zodiacSigns[0].id,
 };
 
