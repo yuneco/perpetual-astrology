@@ -34,7 +34,7 @@ const theme = createTheme({
         modal: {
           position: "fixed",
           left: "50%",
-          top: "50%",
+          top: "calc(50% - 32px)",
           transform: "translate(-50%, -50%)",
           transformOrigin: "left top",
           p: 32,
