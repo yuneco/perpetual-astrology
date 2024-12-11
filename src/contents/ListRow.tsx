@@ -24,13 +24,7 @@ const ListRowComp: FC<Props> = ({ dayNo, seedNumber, onClick }) => {
       borderRadius={4}
       alignItems={"center"}
       padding="0 8px"
-      style={{
-        pointerEvents: "auto",
-      }}
-      _hover={{
-        bg: "colors.focus.bg",
-        cursor: "pointer",
-      }}
+      className="list-row"
       onClick={() => onClick(dayNo)}
     >
       <Flex gap={4} alignItems="center">

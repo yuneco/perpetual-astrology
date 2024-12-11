@@ -21,6 +21,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@media (any-hover: hover) {
+  .list-row:hover {
+    background-color: #fadde6ff;
+    cursor: "pointer",
+  }
+}
+
 * {
   box-sizing: border-box;  
 }
