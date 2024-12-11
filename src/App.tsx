@@ -16,6 +16,7 @@ import {
   initialLoc,
   useAutoSetLocation,
 } from "./contents/logics/useAutoSetLocation";
+import { Info } from "./contents/Info";
 
 export const App = () => {
   const [y, setY] = useState(0);
@@ -72,6 +73,7 @@ export const App = () => {
       ) : (
         <InitialSetting onOk={setSeed} initialSeed={initialSeed} />
       )}
+      <Info />
     </Box>
   );
 };

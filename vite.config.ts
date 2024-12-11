@@ -4,5 +4,6 @@ import KumaUI from "@kuma-ui/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "./",
   plugins: [react(), KumaUI()],
 });

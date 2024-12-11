@@ -77,6 +77,7 @@ export const DayDetail: FC<Props> = ({ dayNo, seed, onClose }) => {
         ref={innerRef}
         variant="modal"
         width="max(400px, 50%)"
+        maxW="800px"
         animation="pop 0.2s 1"
         onClick={(ev: React.MouseEvent) => ev.stopPropagation()}
       >

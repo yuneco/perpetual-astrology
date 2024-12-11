@@ -1,5 +1,5 @@
 import { memo, type FC } from "react";
-import { css, Flex, k } from "@kuma-ui/core";
+import { css, Flex, k, Text } from "@kuma-ui/core";
 import { StarRating } from "./StarRating";
 import { ColorBar } from "./ColorBar";
 import { ROW_HEIGHT } from "../defs/appConfig";
@@ -33,16 +33,18 @@ const ListRowComp: FC<Props> = ({ dayNo, seedNumber, onClick }) => {
       }}
       onClick={() => onClick(dayNo)}
     >
-      <Flex gap={4} fontFamily="fonts.mono" alignItems="center">
-        <span>{toYMD(contents.date)}</span>
-        <k.span color={contents.dayColor}>{contents.dayOfWeekStr}</k.span>
-        <span>{contents.moon}</span>
+      <Flex gap={4} alignItems="center">
+        <Text fontFamily="fonts.mono">{toYMD(contents.date)}</Text>
+        <Text fontFamily="fonts.mono" color={contents.dayColor}>
+          {contents.dayOfWeekStr}
+        </Text>
+        <Text>{contents.moon}</Text>
         <StarRating rating={contents.rating} />
         <ColorBar
           color={contents.luckyColor}
           textColor={contents.luckyTextColor}
         />
-        <k.span
+        <Text
           paddingLeft={2}
           className={css`
             line-height: 1.2;
@@ -54,7 +56,7 @@ const ListRowComp: FC<Props> = ({ dayNo, seedNumber, onClick }) => {
         `}
         >
           {contents.luckyMenu}
-        </k.span>
+        </Text>
       </Flex>
     </Flex>
   );
